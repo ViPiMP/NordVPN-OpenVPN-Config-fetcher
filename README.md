@@ -1,33 +1,49 @@
 # NordVPN-OpenVPN-Config-fetcher
-Fetch all OpenVPN Configs of NordVPN
+Fetch OpenVPN Configs von NordVPN (UDP/TCP, optional Obfuscated-Server, Länderfilter).
 
 ## Usage
+
+Standard (UDP, alle Länder, nicht-obfuscated):
 
 ```bash
 ./get_nordvpn_udp_configs.sh
 ```
 
-Optional output directory:
+Interaktiv (fragt nach Obfuscated + Länder oder alle):
+
+```bash
+./get_nordvpn_udp_configs.sh --interactive
+```
+
+Optionales Output-Verzeichnis:
 
 ```bash
 ./get_nordvpn_udp_configs.sh my-configs
 ```
 
-Optional parallel download count:
+Nicht-interaktiv mit Optionen:
 
 ```bash
-PARALLEL_DOWNLOADS=16 ./get_nordvpn_udp_configs.sh
+./get_nordvpn_udp_configs.sh --protocol tcp --obfuscated 1 --countries DE,US
 ```
 
-Optional server limit (useful for quick tests):
+Optionale Umgebungsvariablen:
 
 ```bash
-MAX_SERVERS=50 ./get_nordvpn_udp_configs.sh
+PARALLEL_DOWNLOADS=16 MAX_SERVERS=50 ./get_nordvpn_udp_configs.sh
 ```
+
+## Optionen
+
+- `--interactive` interaktive Abfragen
+- `--protocol udp|tcp`
+- `--obfuscated 0|1`
+- `--countries LISTE` (`all`, `DE,US`, `Germany,France`)
+- `--help`
 
 ## Requirements
 
 - `curl`
 - `jq`
 
-The old script name `get_nordvpn_upd_configs.sh` still works for compatibility.
+Der alte Scriptname `get_nordvpn_upd_configs.sh` bleibt aus Kompatibilitätsgründen erhalten und ruft das neue Hauptscript auf.
